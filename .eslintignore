@@ -1,0 +1,9 @@
+/config/
+/public/
+/scripts/
+/src/App.css
+/src/App.test.js
+/src/Graph.js
+/src/index.css
+/src/index.js
+/src/serviceWorker.js
