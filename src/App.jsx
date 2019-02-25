@@ -77,7 +77,7 @@ class App extends Component {
     if (value != null) {
       switch (name) {
         case 'urls':
-          this.state.urls = value.split(',');
+          this.setState({ urls: value.split(',') });
           this.setState({ urlErrors: false });
           break;
         case 'before':
@@ -220,7 +220,11 @@ class App extends Component {
     const errors = [formErrors, urlErrors, beforeErrors, afterErrors, intervalErrors]
       .map((error, index) => {
         const display = error ? 'block' : 'none';
-        return <Error display={display} notice={errorMessages[index]} />;
+        const k = index;
+        if (error) {
+          return <Error key={k} display={display} notice={errorMessages[index]} />;
+        }
+        return null;
       });
     return (
       <div className="App">
@@ -232,27 +236,27 @@ class App extends Component {
         </p>
         {errors}
         <form id="bodyForm" onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <label htmlFor="urls">
+          <label id="urlsLabel" htmlFor="urls">
             URLS:
-            <textarea placeholder="Enter URLs separated by commas..." type="text" name="urls" defaultValue={urls} />
+            <textarea id="urls" placeholder="Enter URLs separated by commas..." type="text" name="urls" defaultValue={urls} />
           </label>
           <br />
-          <label htmlFor="before">
+          <label id="beforeLabel" htmlFor="before">
             Before:
-            <input placeholder="Enter milliseconds Timestamp..." type="text" name="before" defaultValue={before} />
+            <input id="before" placeholder="Enter milliseconds Timestamp..." type="text" name="before" defaultValue={before} />
           </label>
           <br />
-          <label htmlFor="after">
+          <label id="afterLabel" htmlFor="after">
             After:
-            <input placeholder="Enter milliseconds Timestamp..." type="text" name="after" defaultValue={after} />
+            <input id="after" placeholder="Enter milliseconds Timestamp..." type="text" name="after" defaultValue={after} />
           </label>
           <br />
-          <label htmlFor="interval">
+          <label id="intervalLabel" htmlFor="interval">
             Interval:
-            <input placeholder="Enter interval such as 2m or 2s..." type="text" name="interval" defaultValue={interval} />
+            <input id="interval" placeholder="Enter interval such as 2m or 2s..." type="text" name="interval" defaultValue={interval} />
           </label>
           <br />
-          <input type="submit" value="Submit" />
+          <input id="submit" type="submit" value="Submit" />
         </form>
       </div>
     );

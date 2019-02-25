@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component snapshots App component snapshot should render correctly 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="App-header"
+  >
+    <h1
+      className="App-title"
+    >
+      Date Histogram Visualisation
+    </h1>
+  </header>
+  <p
+    className="App-intro"
+  >
+    Please enter the GET request data below:
+  </p>
+  <form
+    id="bodyForm"
+    onChange={[Function]}
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="urls"
+      id="urlsLabel"
+    >
+      URLS:
+      <textarea
+        defaultValue={Array []}
+        id="urls"
+        name="urls"
+        placeholder="Enter URLs separated by commas..."
+        type="text"
+      />
+    </label>
+    <br />
+    <label
+      htmlFor="before"
+      id="beforeLabel"
+    >
+      Before:
+      <input
+        defaultValue=""
+        id="before"
+        name="before"
+        placeholder="Enter milliseconds Timestamp..."
+        type="text"
+      />
+    </label>
+    <br />
+    <label
+      htmlFor="after"
+      id="afterLabel"
+    >
+      After:
+      <input
+        defaultValue=""
+        id="after"
+        name="after"
+        placeholder="Enter milliseconds Timestamp..."
+        type="text"
+      />
+    </label>
+    <br />
+    <label
+      htmlFor="interval"
+      id="intervalLabel"
+    >
+      Interval:
+      <input
+        defaultValue=""
+        id="interval"
+        name="interval"
+        placeholder="Enter interval such as 2m or 2s..."
+        type="text"
+      />
+    </label>
+    <br />
+    <input
+      id="submit"
+      type="submit"
+      value="Submit"
+    />
+  </form>
+</div>
+`;
+
+exports[`Component snapshots Error components mount should render correctly 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="App-header"
+  >
+    <h1
+      className="App-title"
+    >
+      Date Histogram Visualisation
+    </h1>
+  </header>
+  <p
+    className="App-intro"
+  >
+    Please enter the GET request data below:
+  </p>
+  <form
+    id="bodyForm"
+    onChange={[Function]}
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="urls"
+      id="urlsLabel"
+    >
+      URLS:
+      <textarea
+        defaultValue={Array []}
+        id="urls"
+        name="urls"
+        placeholder="Enter URLs separated by commas..."
+        type="text"
+      />
+    </label>
+    <br />
+    <label
+      htmlFor="before"
+      id="beforeLabel"
+    >
+      Before:
+      <input
+        defaultValue=""
+        id="before"
+        name="before"
+        placeholder="Enter milliseconds Timestamp..."
+        type="text"
+      />
+    </label>
+    <br />
+    <label
+      htmlFor="after"
+      id="afterLabel"
+    >
+      After:
+      <input
+        defaultValue=""
+        id="after"
+        name="after"
+        placeholder="Enter milliseconds Timestamp..."
+        type="text"
+      />
+    </label>
+    <br />
+    <label
+      htmlFor="interval"
+      id="intervalLabel"
+    >
+      Interval:
+      <input
+        defaultValue=""
+        id="interval"
+        name="interval"
+        placeholder="Enter interval such as 2m or 2s..."
+        type="text"
+      />
+    </label>
+    <br />
+    <input
+      id="submit"
+      type="submit"
+      value="Submit"
+    />
+  </form>
+</div>
+`;

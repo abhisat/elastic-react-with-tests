@@ -56,5 +56,4 @@ if (argv.indexOf('--no-watch') !== -1) {
   argv = argv.filter(arg => arg !== '--no-watch');
 }
 
-
 jest.run(argv);

@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import './App.css';
-import 'plotly.js';
+//import 'plotly.js';
 
 class Graph extends Component {
     constructor(props) {
