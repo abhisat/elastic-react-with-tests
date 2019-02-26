@@ -72,7 +72,10 @@ describe('App components mounts', () => {
 
 // Unit tests to check if the individual components render correctly
 describe('The components render correctly', () => {
-  const wrapper = setupApp();
+  let wrapper;
+  beforeEach(() => {
+    wrapper = setupApp();
+  });
   describe('The header renders correctly', () => {
     it('Renders the Header text', () => {
       expect(wrapper.find('h1').text()).toBe('Date Histogram Visualisation');
@@ -136,13 +139,16 @@ describe('The components render correctly', () => {
 describe('Validation Errors display', () => {
   const props = {};
   describe('URL error renders correctly', () => {
-    const wrapper = setupApp();
-    wrapper.setState({ urlErrors: true }, () => {
-      props.key = 'urlErrors';
-      props.display = wrapper.state.urlErrors ? 'block' : 'none';
-      props.notice = 'Notice: URL cannot be empty';
+    let wrapper;
+    beforeEach(() => {
+      wrapper = setupApp(props);
+      wrapper.setState({ urlErrors: true }, () => {
+        props.key = 'urlErrors';
+        props.display = wrapper.state.urlErrors ? 'block' : 'none';
+        props.notice = 'Notice: URL cannot be empty';
+      });
+      wrapper.update();
     });
-    wrapper.update();
 
     it('renders the correct number of errors', () => {
       expect(wrapper.find(Error).length).toEqual(1);
@@ -150,13 +156,16 @@ describe('Validation Errors display', () => {
   });
 
   describe('Before timestamp error renders correctly', () => {
-    const wrapper = setupApp();
-    wrapper.setState({ beforeErrors: true }, () => {
-      props.key = 'beforeErrors';
-      props.display = wrapper.state.beforeErrors ? 'block' : 'none';
-      props.notice = 'Notice: Invalid Before Timestamp';
-    });
-    wrapper.update();
+    let wrapper
+    beforeEach(() => {
+      wrapper = setupApp(props);
+      wrapper.setState({ beforeErrors: true }, () => {
+        props.key = 'beforeErrors';
+        props.display = wrapper.state.beforeErrors ? 'block' : 'none';
+        props.notice = 'Notice: Invalid Before Timestamp';
+      });
+      wrapper.update();
+    })
 
     it('renders the correct number of errors', () => {
       expect(wrapper.find(Error).length).toEqual(1);
@@ -170,13 +179,16 @@ describe('Validation Errors display', () => {
 
 // Tests whether the error component is stateless
 describe('Tests if the Error component is stateless', () => {
-  const props = {
-    key: 0,
-    display: 'block',
-    notice: 'Notice: URL cannot be empty',
-  };
-  const wrapper = setupErrors(props);
-  const instance = wrapper.instance();
+  let instance;
+  beforeEach(() => {
+    const props = {
+      key: 0,
+      display: 'block',
+      notice: 'Notice: URL cannot be empty',
+    };
+    const wrapper = setupErrors(props);
+    instance = wrapper.instance();
+  });
 
   it('should return null', () => {
     expect(instance).toBe(null);
@@ -185,25 +197,30 @@ describe('Tests if the Error component is stateless', () => {
 
 // Unit Tests whether the validateInput functions correctly
 describe('Test validateInput function', () => {
-  const props = {};
-  const state = {
-    urls: [],
-    before: '',
-    after: '',
-    interval: '',
-    submitted: false,
-    loading: false,
-    validInputs: false,
-    labels: [],
-    values: [],
-    urlErrors: false,
-    beforeErrors: false,
-    afterErrors: false,
-    intervalErrors: false,
-    formErrors: false,
-  };
-  const wrapper = setupApp(props, state);
-  const instance = wrapper.instance();
+  let wrapper;
+  let instance;
+  beforeEach(() => {
+    const props = {};
+    const state = {
+      urls: [],
+      before: '',
+      after: '',
+      interval: '',
+      submitted: false,
+      loading: false,
+      validInputs: false,
+      labels: [],
+      values: [],
+      urlErrors: false,
+      beforeErrors: false,
+      afterErrors: false,
+      intervalErrors: false,
+      formErrors: false,
+    };
+    wrapper = setupApp(props, state);
+    instance = wrapper.instance();
+  });
+
   describe('validates urls', () => {
     it('tests whether urlErrors state remains unchanged on valid input', () => {
       const name = 'urls';
@@ -305,14 +322,18 @@ describe('Test validateInput function', () => {
 
 describe('Tests behaviour on submit', () => {
   describe('Submit empty form', () => {
-    const props = {};
-    const state = {
-      urls: [],
-      before: '',
-      after: '',
-      interval: '',
-    };
-    const wrapper = setupApp(props, state);
+    let wrapper;
+    beforeEach(() => {
+      const props = {};
+      const state = {
+        urls: [],
+        before: '',
+        after: '',
+        interval: '',
+      };
+      wrapper = setupApp(props, state);
+    });
+
     it('should render the error messages for form error and url', () => {
       wrapper.find('form').simulate('submit', {
         preventDefault: () => {
@@ -324,14 +345,18 @@ describe('Tests behaviour on submit', () => {
   });
 
   describe('Submit form with missing inputs', () => {
-    const props = {};
-    const state = {
-      urls: ['www.google.com', 'www.facebook.com'],
-      before: '',
-      after: '',
-      interval: '2s',
-    };
-    const wrapper = setupApp(props, state);
+    let wrapper;
+    beforeEach(() => {
+      const props = {};
+      const state = {
+        urls: ['www.google.com', 'www.facebook.com'],
+        before: '',
+        after: '',
+        interval: '2s',
+      };
+      wrapper = setupApp(props, state);
+    });
+
     it('should render the error messages for form error and url', () => {
       wrapper.find('form').simulate('submit', {
         preventDefault: () => {
@@ -342,14 +367,18 @@ describe('Tests behaviour on submit', () => {
   });
 
   describe('submit form with proper inputs', () => {
-    const props = {};
-    const state = {
-      urls: ['www.google.com', 'www.facebook.com'],
-      before: '1551083904',
-      after: '1551084478',
-      interval: '2s',
-    };
-    const wrapper = setupMountApp(props, state);
+    let wrapper;
+    beforeEach(() => {
+      const props = {};
+      const state = {
+        urls: ['www.google.com', 'www.facebook.com'],
+        before: '1551083904',
+        after: '1551084478',
+        interval: '2s',
+      };
+      wrapper = setupMountApp(props, state);
+    });
+
     it('should render the graph component', () => {
       wrapper.find('form').simulate('submit', {
         preventDefault: () => {
@@ -362,40 +391,45 @@ describe('Tests behaviour on submit', () => {
 });
 
 describe('Test calculateVals function', () => {
+  let wrapper;
+  let instance;
   const response = [];
-  const props = {};
-  const state = {
-    urls: [],
-    before: '',
-    after: '',
-    interval: '',
-    submitted: false,
-    loading: false,
-    validInputs: false,
-    labels: [],
-    values: [],
-    urlErrors: false,
-    beforeErrors: false,
-    afterErrors: false,
-    intervalErrors: false,
-    formErrors: false,
-  };
-  const wrapper = setupApp(props, state);
-  const instance = wrapper.instance();
+  beforeEach(() => {
+    const props = {};
+    const state = {
+      urls: [],
+      before: '',
+      after: '',
+      interval: '',
+      submitted: false,
+      loading: false,
+      validInputs: false,
+      labels: [],
+      values: [],
+      urlErrors: false,
+      beforeErrors: false,
+      afterErrors: false,
+      intervalErrors: false,
+      formErrors: false,
+    };
+    wrapper = setupApp(props, state);
+    instance = wrapper.instance();
+  });
 
-  expect(wrapper.state('labels')).toEqual([]);
-  expect(wrapper.state('values')).toEqual([]);
-  instance.calculateVals(response);
-  expect(wrapper.state('labels')).toEqual([]);
-  expect(wrapper.state('values')).toEqual([]);
+  it('should update the relevant states', () => {
+    expect(wrapper.state('labels')).toEqual([]);
+    expect(wrapper.state('values')).toEqual([]);
+    instance.calculateVals(response);
+    expect(wrapper.state('labels')).toEqual([]);
+    expect(wrapper.state('values')).toEqual([]);
+  });
 });
 
 // Tests Event Handlers
 describe('The event handlers work properly', () => {
   describe('calls handleSubmit', () => {
     const wrapper = setupApp();
-    const handleSubmit = sinon.spy(wrapper.instance(), 'handleSubmit');
-    wrapper.instance.forceUpdate();
+    const handleSubmit = sinon.spy(App.prototype, 'handleSubmit');
     wrapper.update();
     wrapper.find('form').simulate('submit', {
       preventDefault: () => {
@@ -406,8 +440,7 @@ describe('The event handlers work properly', () => {
 
   describe('calls handleChange', () => {
     const wrapper = setupApp();
-    const handleChange = sinon.spy(wrapper.instance(), 'handleChange');
-    wrapper.instance.forceUpdate();
+    const handleChange = sinon.spy(App.prototype, 'handleChange');
     wrapper.update();
     wrapper.find('#urls').simulate('keydown', {
       which: 'a',
