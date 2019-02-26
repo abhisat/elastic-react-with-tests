@@ -1,6 +1,6 @@
 import React from 'react';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
-import Enzyme, { shallow, mount, sinonwq } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import canvas from 'canvas';
 import jest from 'jest';
